@@ -1,0 +1,28 @@
+body{
+  background-image: url('../images/bg2.png');
+  background-size: cover;
+}
+.container{
+  color:white;
+}
+.attack{
+  color:black;
+}
+#anakin{
+  background-image: url("../images/anakin.jpg");
+}
+#obiwan{
+  background-image: url("../images/obiwan.jpg");
+}
+#dooku{
+  background-image: url("../images/dooku.jpg");
+}
+#vader{
+  background-image: url("../images/vader.jpg");
+}
+.character{
+  background-size: cover;
+  width:100px;
+  height:100px;
+  border-radius: 100px;
+}

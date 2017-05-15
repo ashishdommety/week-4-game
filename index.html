@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Star wars RPG</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <h1>Star Wars RPG</h1>
+    </div>
+
+    <div id="chooseChar" class="row">
+      <h2>Choose Character</h2>
+      <div class="col-md-3 player enemy anakin">
+        <p>Anankin</p>
+        <div id="anakin" class='character'></div>
+        <p id='anakinHP' class="hp">150</p>
+      </div>
+      <div class="col-md-3 player enemy obiwan">
+        <p>Obi-Wan</p>
+          <div id="obiwan" class='character'></div>
+        <p id='obiwanHP' class="hp">180</p>
+      </div>
+      <div class="col-md-3 player enemy dooku">
+        <p>Count Dooku</p>
+        <div id="dooku" class='character'></div>
+        <p id='dookuHP' class="hp">200</p>
+      </div>
+      <div class="col-md-3 player enemy vader">
+        <p>Darth Vader</p>
+        <div id="vader" class='character'></div>
+        <p id='vaderHP' class="hp">250</p>
+      </div>
+    </div>
+
+    <div id="yourChar" class='row'>
+      <h2>Your Character</h2>
+
+    </div>
+    <div id="enemies" class='row'>
+
+      <h2>Enemies</h2>
+    </div>
+    <div id="fight" class="row">
+      <h2>Defender</h2>
+      <button class="attack">Attack</button>
+
+    </div>
+
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="assets/javascript/game.js" charset="utf-8"></script>
+</body>
+
+</html>
