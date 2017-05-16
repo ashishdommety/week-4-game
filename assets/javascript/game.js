@@ -27,6 +27,7 @@ $(document).ready(function() {
   }
 
   $('.player').off().on('click', function() {
+    playEnterance();
     $(this).removeClass("player");
     $(this).addClass("user");
     $('#yourChar').append($('.user'));
@@ -38,8 +39,8 @@ $(document).ready(function() {
 
   function bindEnemy() {
     $('.enemy').off().on('click', function() {
+  playEnterance();
       if ($('.defender').length === 0) {
-        console.log('called enemy event');
         $(this).removeClass("enemy");
         $(this).addClass('defender');
         $('.defender').off();
@@ -49,21 +50,26 @@ $(document).ready(function() {
     });
   }
   $('.attack').on('click', function() {
+    $('#'+ defender.name).text('Hit-'+player.currentAttack);
     defender.hp = defender.hp - player.currentAttack;
     player.currentAttack += player.attack;
-    console.log(player.name + " attack is : " + player.currentAttack);
+    // console.log(player.name + " attack is : " + player.currentAttack);
     $('#' + defender.name + 'HP').text(defender.hp);
     if (defender.hp <= 0) {
       console.log(defender.name + " is dead");
       $('#enemies').append($('.defender'));
       $('#' + defender.name + 'HP').text('dead');
       $('.defender').removeClass('defender').addClass('dead');
+      playAttack();
       checkWin();
+
     }
     //defender attacks back
+    $('#'+ player.name).text('Hit-'+ defender.attack);
     player.hp = player.hp - defender.attack;
     $('#' + player.name + 'HP').text(player.hp);
-    console.log(defender.name + " attack is : " + defender.attack);
+    // console.log(defender.name + " attack is : " + defender.attack);
+    playAttack();
     checkLose();
   });
 
@@ -91,4 +97,32 @@ $(document).ready(function() {
       resetButton();
     }
   }
+
+  //Sounds go here
+  var bgm = new Audio();
+  bgm.src = 'assets/sounds/bgm.mp3';
+  bgm.play();
+  bgm.volume = 0.1;
+  bgm.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+  }, false);
+
+  var entrance = new Audio();
+  entrance.src = 'assets/sounds/entrance.wav';
+  function playEnterance(){
+    entrance.currentTime = 0;
+    entrance.play();
+  }
+
+  // console.log(attackSounds);
+  var hit = new Audio();
+
+  function playAttack(){
+    var attackNum = Math.round(Math.random()*3);
+    hit.src = 'assets/sounds/attackSound'+attackNum+'.wav';
+    hit.currentTime = 0;
+    hit.play();
+  }
+
 });
