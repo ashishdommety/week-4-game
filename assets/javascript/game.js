@@ -35,11 +35,13 @@ $(document).ready(function() {
             $('#enemies').append($('.obiwan'));
             $('#obiwanHP').text('dead');
             $('.obiwan').removeClass('defender');
+            checkWin();
           }
           //obi wan attacks back
           anakin.hp = anakin.hp - obiwan.attack;
           $('#anakinHP').text(anakin.hp);
           console.log("Obiwan's attack is : " + obiwan.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is dooku
@@ -53,11 +55,13 @@ $(document).ready(function() {
             $('#enemies').append($('.dooku'));
             $('#dookuHP').text('dead');
             $('.dooku').removeClass('defender');
+            checkWin();
           }
           //dooku attacks back
           anakin.hp = anakin.hp - dooku.attack;
           $('#anakinHP').text(anakin.hp);
           console.log("Dooku's attack is : " + dooku.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is vader
@@ -71,11 +75,13 @@ $(document).ready(function() {
             $('#enemies').append($('.vader'));
             $('#vaderHP').text('dead');
             $('.vader').removeClass('defender');
+            checkWin();
           }
           //vader attacks back
           anakin.hp = anakin.hp - vader.attack;
           $('#anakinHP').text(anakin.hp);
           console.log("Vader's attack is : " + vader.attack);
+          checkLose();
           //health is checked
         }
       }
@@ -92,11 +98,13 @@ $(document).ready(function() {
             $('#enemies').append($('.vader'));
             $('#vaderHP').text('dead');
             $('.vader').removeClass('defender');
+            checkWin();
           }
           //vader attacks back
           obiwan.hp = obiwan.hp - vader.attack;
           $('#obiwanHP').text(obiwan.hp);
           console.log("Vader's attack is : " + vader.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is dooku
@@ -110,11 +118,13 @@ $(document).ready(function() {
             $('#enemies').append($('.dooku'));
             $('#dookuHP').text('dead');
             $('.dooku').removeClass('defender');
+            checkWin();
           }
           //dooku attacks back
           obiwan.hp = obiwan.hp - dooku.attack;
           $('#obiwanHP').text(obiwan.hp);
           console.log("Dooku's attack is : " + dooku.attack);
+          checkLose();
           //health is checked
         }
 
@@ -129,11 +139,13 @@ $(document).ready(function() {
             $('#enemies').append($('.anakin'));
             $('#anakinHP').text('dead');
             $('.anakin').removeClass('defender');
+            checkWin();
           }
           //anakin attacks back
           obiwan.hp = obiwan.hp - anakin.attack;
           $('#obiwanHP').text(obiwan.hp);
           console.log("anakin's attack is : " + anakin.attack);
+          checkLose();
           //health is checked
         }
       }
@@ -151,11 +163,13 @@ $(document).ready(function() {
             $('#enemies').append($('.anakin'));
             $('#anakinHP').text('dead');
             $('.anakin').removeClass('defender');
+            checkWin();
           }
           //anakin attacks back
           dooku.hp = dooku.hp - anakin.attack;
           $('#dookuHP').text(dooku.hp);
           console.log("anakin's attack is : " + anakin.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is obiwan
@@ -169,11 +183,13 @@ $(document).ready(function() {
             $('#enemies').append($('.obiwan'));
             $('#obiwanHP').text('dead');
             $('.obiwan').removeClass('defender');
+            checkWin();
           }
           //obiwan attacks back
           dooku.hp = dooku.hp - obiwan.attack;
           $('#dookuHP').text(dooku.hp);
           console.log("obiwan's attack is : " + obiwan.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is vader
@@ -187,11 +203,13 @@ $(document).ready(function() {
             $('#enemies').append($('.vader'));
             $('#vaderHP').text('dead');
             $('.vader').removeClass('defender');
+            checkWin();
           }
           //vader attacks back
           dooku.hp = dooku.hp - vader.attack;
           $('#dookuHP').text(dooku.hp);
           console.log("vader's attack is : " + vader.attack);
+          checkLose();
           //health is checked
         }
       }
@@ -208,11 +226,13 @@ $(document).ready(function() {
             $('#enemies').append($('.obiwan'));
             $('#obiwanHP').text('dead');
             $('.obiwan').removeClass('defender');
+            checkWin();
           }
           //obiwan attacks back
           vader.hp = vader.hp - obiwan.attack;
           $('#vaderHP').text(vader.hp);
           console.log("obiwan's attack is : " + obiwan.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is anakin
@@ -226,11 +246,13 @@ $(document).ready(function() {
             $('#enemies').append($('.anakin'));
             $('#anakinHP').text('dead');
             $('.anakin').removeClass('defender');
+            checkWin();
           }
           //anakin attacks back
           vader.hp = vader.hp - anakin.attack;
           $('#vaderHP').text(vader.hp);
           console.log("anakin's attack is : " + anakin.attack);
+          checkLose();
           //health is checked
         }
         //if enemy is obiwan
@@ -244,13 +266,93 @@ $(document).ready(function() {
             $('#enemies').append($('.dooku'));
             $('#dookuHP').text('dead');
             $('.dooku').removeClass('defender');
+            checkWin();
           }
           //dooku attacks back
           vader.hp = vader.hp - dooku.attack;
           $('#vaderHP').text(vader.hp);
           console.log("dooku's attack is : " + dooku.attack);
+          checkLose();
           //health is checked
         }
       }
   });
+  function checkWin(){
+    //ANAKIN WIN
+    if ($(".user").hasClass("anakin")){
+      if(dooku.hp < 0 && obiwan.hp < 0 && vader.hp < 0){
+        alert('You Win!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    else if($(".user").hasClass("obiwan")){
+      if(anakin.hp < 0 && dooku.hp < 0 && vader.hp < 0){
+        alert('You Win!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    else if($(".user").hasClass("dooku")){
+      if(anakin.hp < 0 && obiwan.hp < 0 && vader.hp < 0){
+        alert('You Win!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    else if($(".user").hasClass("vader")){
+      if(anakin.hp < 0 && obiwan.hp < 0 && dooku.hp < 0){
+        alert('You Win!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    $('.reset').on('click', function(){
+      // console.log('you hit reset');
+      location.reload();
+    });
+  }
+  function checkLose(){
+    if ($(".user").hasClass("anakin")){
+      if(anakin.hp < 0){
+        alert('You Lose!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    else if($(".user").hasClass("obiwan")){
+      if(obiwan.hp < 0){
+        alert('You Lose!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    else if($(".user").hasClass("dooku")){
+      if(dooku.hp < 0){
+        alert('You Lose!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    else if($(".user").hasClass("vader")){
+      if(vader.hp < 0){
+        alert('You Lose!');
+        var reset = $('<button>').text('reset');
+        reset.addClass('reset');
+        $('#fight').append(reset);
+      }
+    }
+    $('.reset').on('click', function(){
+      // console.log('you hit reset');
+      location.reload();
+    });
+  }
+
 });

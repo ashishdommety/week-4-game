@@ -8,6 +8,9 @@ body{
 .attack{
   color:black;
 }
+.reset{
+  color:black;
+}
 #anakin{
   background-image: url("../images/anakin.jpg");
 }
