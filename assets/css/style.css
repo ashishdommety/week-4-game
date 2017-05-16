@@ -5,10 +5,7 @@ body{
 .container{
   color:white;
 }
-.attack{
-  color:black;
-}
-.reset{
+.attack, .reset{
   color:black;
 }
 #anakin{

@@ -1,358 +1,94 @@
 $(document).ready(function() {
-  var Players = function(name, attack, hp) {
-    this.name = name;
-    this.attack = attack;
-    this.hp = hp;
+  var players = {
+    anakin: {
+      name: 'anakin',
+      attack: 15,
+      hp: 150,
+      currentAttack: 15
+    },
+    obiwan: {
+      name: 'obiwan',
+      attack: 18,
+      hp: 180,
+      currentAttack: 18
+    },
+    dooku: {
+      name: 'dooku',
+      attack: 20,
+      hp: 200,
+      currentAttack: 20
+    },
+    vader: {
+      name: 'vader',
+      attack: 25,
+      hp: 250,
+      currentAttack: 25
+    }
   }
-  var anakin = new Players('anakin', 15, 150);
-  var obiwan = new Players('obiwan', 18, 180);
-  var dooku = new Players('dooku', 20, 200);
-  var vader = new Players('vader', 30, 250);
 
-  $('.player').on('click', function() {
-    $(this).removeClass("enemy");
+  $('.player').off().on('click', function() {
+    $(this).removeClass("player");
     $(this).addClass("user");
     $('#yourChar').append($('.user'));
+    $('.player').addClass('enemy').removeClass('player');
     $('#enemies').append($('.enemy'));
-    $('.enemy').on('click', function() {
-      $(this).removeClass("user");
-      $(this).addClass('defender');
-      $('#fight').append($(this));
-    });
+    player = players[$('.user').data('user-name')];
+    bindEnemy();
   });
 
+  function bindEnemy() {
+    $('.enemy').off().on('click', function() {
+      if ($('.defender').length === 0) {
+        console.log('called enemy event');
+        $(this).removeClass("enemy");
+        $(this).addClass('defender');
+        $('.defender').off();
+        $('#fight').append($(this));
+        defender = players[$('.defender').data('user-name')];
+      }
+    });
+  }
   $('.attack').on('click', function() {
-//ANAKIN
-      if ($(".user").hasClass("anakin")) {
-        //if enemy is obiwan
-        if ($('.defender').hasClass('obiwan')) {
-          obiwan.hp = obiwan.hp - anakin.attack;
-          anakin.attack += 15;
-          console.log("Anakin's attack is : " + anakin.attack);
-          $('#obiwanHP').text(obiwan.hp);
-          if ($('#obiwanHP').text() < 0) {
-            console.log("obiwan is dead");
-            $('#enemies').append($('.obiwan'));
-            $('#obiwanHP').text('dead');
-            $('.obiwan').removeClass('defender');
-            checkWin();
-          }
-          //obi wan attacks back
-          anakin.hp = anakin.hp - obiwan.attack;
-          $('#anakinHP').text(anakin.hp);
-          console.log("Obiwan's attack is : " + obiwan.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is dooku
-        if ($('.defender').hasClass('dooku')) {
-          dooku.hp = dooku.hp - anakin.attack;
-          anakin.attack += 15;
-          $('#dookuHP').text(dooku.hp);
-          console.log("Anakin's attack is : " + anakin.attack);
-          if ($('#dookuHP').text() < 0) {
-            console.log("dooku is dead");
-            $('#enemies').append($('.dooku'));
-            $('#dookuHP').text('dead');
-            $('.dooku').removeClass('defender');
-            checkWin();
-          }
-          //dooku attacks back
-          anakin.hp = anakin.hp - dooku.attack;
-          $('#anakinHP').text(anakin.hp);
-          console.log("Dooku's attack is : " + dooku.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is vader
-        if ($('.defender').hasClass('vader')) {
-          vader.hp = vader.hp - anakin.attack;
-          anakin.attack += 15;
-          console.log("Anakin's attack is : " + anakin.attack);
-          $('#vaderHP').text(vader.hp);
-          if ($('#vaderHP').text() < 0) {
-            console.log("vader is dead");
-            $('#enemies').append($('.vader'));
-            $('#vaderHP').text('dead');
-            $('.vader').removeClass('defender');
-            checkWin();
-          }
-          //vader attacks back
-          anakin.hp = anakin.hp - vader.attack;
-          $('#anakinHP').text(anakin.hp);
-          console.log("Vader's attack is : " + vader.attack);
-          checkLose();
-          //health is checked
-        }
-      }
-//OBIWAN
-      else if ($(".user").hasClass("obiwan")) {
-        //if enemy is vader
-        if ($('.defender').hasClass('vader')) {
-          vader.hp = vader.hp - obiwan.attack;
-          obiwan.attack += 18;
-          console.log("Obiwan's attack is : " + obiwan.attack);
-          $('#vaderHP').text(vader.hp);
-          if ($('#vaderHP').text() < 0) {
-            console.log("vader is dead");
-            $('#enemies').append($('.vader'));
-            $('#vaderHP').text('dead');
-            $('.vader').removeClass('defender');
-            checkWin();
-          }
-          //vader attacks back
-          obiwan.hp = obiwan.hp - vader.attack;
-          $('#obiwanHP').text(obiwan.hp);
-          console.log("Vader's attack is : " + vader.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is dooku
-        if ($('.defender').hasClass('dooku')) {
-          dooku.hp = dooku.hp - obiwan.attack;
-          obiwan.attack += 18;
-          console.log("Obiwan's attack is : " + obiwan.attack);
-          $('#dookuHP').text(dooku.hp);
-          if ($('#dookuHP').text() < 0) {
-            console.log("dooku is dead");
-            $('#enemies').append($('.dooku'));
-            $('#dookuHP').text('dead');
-            $('.dooku').removeClass('defender');
-            checkWin();
-          }
-          //dooku attacks back
-          obiwan.hp = obiwan.hp - dooku.attack;
-          $('#obiwanHP').text(obiwan.hp);
-          console.log("Dooku's attack is : " + dooku.attack);
-          checkLose();
-          //health is checked
-        }
-
-        //if enemy is anakin
-        if ($('.defender').hasClass('anakin')) {
-          anakin.hp = anakin.hp - obiwan.attack;
-          obiwan.attack += 18;
-          console.log("Obiwan's attack is : " + obiwan.attack);
-          $('#anakinHP').text(anakin.hp);
-          if ($('#anakinHP').text() < 0) {
-            console.log("anakin is dead");
-            $('#enemies').append($('.anakin'));
-            $('#anakinHP').text('dead');
-            $('.anakin').removeClass('defender');
-            checkWin();
-          }
-          //anakin attacks back
-          obiwan.hp = obiwan.hp - anakin.attack;
-          $('#obiwanHP').text(obiwan.hp);
-          console.log("anakin's attack is : " + anakin.attack);
-          checkLose();
-          //health is checked
-        }
-      }
-
-//DOOKU
-      else if ($(".user").hasClass("dooku")) {
-        //if enemy is anakin
-        if ($('.defender').hasClass('anakin')) {
-          anakin.hp = anakin.hp - dooku.attack;
-          dooku.attack += 20;
-          console.log("Dooku's attack is : " + dooku.attack);
-          $('#anakinHP').text(anakin.hp);
-          if ($('#anakinHP').text() < 0) {
-            console.log("anakin is dead");
-            $('#enemies').append($('.anakin'));
-            $('#anakinHP').text('dead');
-            $('.anakin').removeClass('defender');
-            checkWin();
-          }
-          //anakin attacks back
-          dooku.hp = dooku.hp - anakin.attack;
-          $('#dookuHP').text(dooku.hp);
-          console.log("anakin's attack is : " + anakin.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is obiwan
-        if ($('.defender').hasClass('obiwan')) {
-          obiwan.hp = obiwan.hp - dooku.attack;
-          dooku.attack += 20;
-          console.log("Dooku's attack is : " + dooku.attack);
-          $('#obiwanHP').text(obiwan.hp);
-          if ($('#obiwanHP').text() < 0) {
-            console.log("obiwan is dead");
-            $('#enemies').append($('.obiwan'));
-            $('#obiwanHP').text('dead');
-            $('.obiwan').removeClass('defender');
-            checkWin();
-          }
-          //obiwan attacks back
-          dooku.hp = dooku.hp - obiwan.attack;
-          $('#dookuHP').text(dooku.hp);
-          console.log("obiwan's attack is : " + obiwan.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is vader
-        if ($('.defender').hasClass('vader')) {
-          vader.hp = vader.hp - dooku.attack;
-          dooku.attack += 20;
-          console.log("Dooku's attack is : " + dooku.attack);
-          $('#vaderHP').text(vader.hp);
-          if ($('#vaderHP').text() < 0) {
-            console.log("vader is dead");
-            $('#enemies').append($('.vader'));
-            $('#vaderHP').text('dead');
-            $('.vader').removeClass('defender');
-            checkWin();
-          }
-          //vader attacks back
-          dooku.hp = dooku.hp - vader.attack;
-          $('#dookuHP').text(dooku.hp);
-          console.log("vader's attack is : " + vader.attack);
-          checkLose();
-          //health is checked
-        }
-      }
-//VADER
-      else if ($(".user").hasClass("vader")) {
-        //if enemy is obiwan
-        if ($('.defender').hasClass('obiwan')) {
-          obiwan.hp = obiwan.hp - vader.attack;
-          vader.attack += 20;
-          console.log("vader's attack is : " + vader.attack);
-          $('#obiwanHP').text(obiwan.hp);
-          if ($('#obiwanHP').text() < 0) {
-            console.log("obiwan is dead");
-            $('#enemies').append($('.obiwan'));
-            $('#obiwanHP').text('dead');
-            $('.obiwan').removeClass('defender');
-            checkWin();
-          }
-          //obiwan attacks back
-          vader.hp = vader.hp - obiwan.attack;
-          $('#vaderHP').text(vader.hp);
-          console.log("obiwan's attack is : " + obiwan.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is anakin
-        if ($('.defender').hasClass('anakin')) {
-          anakin.hp = anakin.hp - vader.attack;
-          vader.attack += 20;
-          console.log("vader's attack is : " + vader.attack);
-          $('#anakinHP').text(anakin.hp);
-          if ($('#anakinHP').text() < 0) {
-            console.log("anakin is dead");
-            $('#enemies').append($('.anakin'));
-            $('#anakinHP').text('dead');
-            $('.anakin').removeClass('defender');
-            checkWin();
-          }
-          //anakin attacks back
-          vader.hp = vader.hp - anakin.attack;
-          $('#vaderHP').text(vader.hp);
-          console.log("anakin's attack is : " + anakin.attack);
-          checkLose();
-          //health is checked
-        }
-        //if enemy is obiwan
-        if ($('.defender').hasClass('dooku')) {
-          dooku.hp = dooku.hp - vader.attack;
-          vader.attack += 20;
-          console.log("vader's attack is : " + vader.attack);
-          $('#dookuHP').text(dooku.hp);
-          if ($('#dookuHP').text() < 0) {
-            console.log("dooku is dead");
-            $('#enemies').append($('.dooku'));
-            $('#dookuHP').text('dead');
-            $('.dooku').removeClass('defender');
-            checkWin();
-          }
-          //dooku attacks back
-          vader.hp = vader.hp - dooku.attack;
-          $('#vaderHP').text(vader.hp);
-          console.log("dooku's attack is : " + dooku.attack);
-          checkLose();
-          //health is checked
-        }
-      }
+    defender.hp = defender.hp - player.currentAttack;
+    player.currentAttack += player.attack;
+    console.log(player.name + " attack is : " + player.currentAttack);
+    $('#' + defender.name + 'HP').text(defender.hp);
+    if (defender.hp <= 0) {
+      console.log(defender.name + " is dead");
+      $('#enemies').append($('.defender'));
+      $('#' + defender.name + 'HP').text('dead');
+      $('.defender').removeClass('defender').addClass('dead');
+      checkWin();
+    }
+    //defender attacks back
+    player.hp = player.hp - defender.attack;
+    $('#' + player.name + 'HP').text(player.hp);
+    console.log(defender.name + " attack is : " + defender.attack);
+    checkLose();
   });
-  function checkWin(){
-    //ANAKIN WIN
-    if ($(".user").hasClass("anakin")){
-      if(dooku.hp < 0 && obiwan.hp < 0 && vader.hp < 0){
-        alert('You Win!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    else if($(".user").hasClass("obiwan")){
-      if(anakin.hp < 0 && dooku.hp < 0 && vader.hp < 0){
-        alert('You Win!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    else if($(".user").hasClass("dooku")){
-      if(anakin.hp < 0 && obiwan.hp < 0 && vader.hp < 0){
-        alert('You Win!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    else if($(".user").hasClass("vader")){
-      if(anakin.hp < 0 && obiwan.hp < 0 && dooku.hp < 0){
-        alert('You Win!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    $('.reset').on('click', function(){
-      // console.log('you hit reset');
-      location.reload();
-    });
-  }
-  function checkLose(){
-    if ($(".user").hasClass("anakin")){
-      if(anakin.hp < 0){
-        alert('You Lose!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    else if($(".user").hasClass("obiwan")){
-      if(obiwan.hp < 0){
-        alert('You Lose!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    else if($(".user").hasClass("dooku")){
-      if(dooku.hp < 0){
-        alert('You Lose!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    else if($(".user").hasClass("vader")){
-      if(vader.hp < 0){
-        alert('You Lose!');
-        var reset = $('<button>').text('reset');
-        reset.addClass('reset');
-        $('#fight').append(reset);
-      }
-    }
-    $('.reset').on('click', function(){
-      // console.log('you hit reset');
+
+  function resetButton() {
+    var reset = $('<button>').text('Reset');
+    reset.addClass('reset');
+    $('#fight').append(reset);
+    $('.reset').on('click', function() {
       location.reload();
     });
   }
 
+  function checkWin() {
+    if ($('.dead').length === 3) {
+      alert('You Win!');
+      $('.attack').remove();
+      resetButton();
+    }
+  }
+
+  function checkLose() {
+    if (player.hp <= 0 && $('.dead').length < 3) {
+      alert('You Lose');
+      $('.attack').remove();
+      resetButton();
+    }
+  }
 });
