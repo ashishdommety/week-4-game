@@ -3,56 +3,50 @@
     anakin: {
       name: 'anakin',
       attack: 15,
-      hp: 150,
-      currentAttack: 15,
-      restoreHealth:150,
-      restoreAttack:15
+      hp: 150
     },
     obiwan: {
       name: 'obiwan',
       attack: 18,
-      hp: 180,
-      currentAttack: 18,
-      restoreHealth:180,
-      restoreAttack:18
+      hp: 180
     },
     dooku: {
       name: 'dooku',
       attack: 20,
-      hp: 200,
-      currentAttack: 20,
-      restoreHealth:200,
-      restoreAttack:20
+      hp: 200
     },
     vader: {
       name: 'vader',
       attack: 25,
-      hp: 250,
-      currentAttack: 25,
-      restoreHealth:250,
-      restoreAttack:25
+      hp: 250
     }
   }
+  var playerAttack;
+  var playerHP;
+  var defenderAttack;
+  var defenderHP;
+
   function init(){
     $('#yourChar').hide();
     $('#fight').hide();
+    $('#enemies').hide();
     $('.reset').hide();
+    $('.player').on('click', function() {
+      $('#chooseChar').hide();
+      $('#yourChar').show();
+      $('#enemies').show();
+      playEnterance();
+      $(this).addClass("user").removeClass("player");
+      $(this).removeClass('defender');
+      $('#yourChar').append($('.user'));
+      $('#yourChar').show();
+      player = players[$('.user').data('user-name')];
+      playerAttack = player.attack;
+      playerHP = player.hp;
+      bindEnemy();
+    });
   }
   init();
-
-  $('.player').on('click', function() {
-    $('#chooseChar').hide();
-    $('#yourChar').show();
-    $('#enemies').show();
-
-    playEnterance();
-    $(this).addClass("user").removeClass("player");
-    // console.log($('.user'));
-    $('#yourChar').append($('.user'));
-    $('#yourChar').show();
-    player = players[$('.user').data('user-name')];
-    bindEnemy();
-  });
 
   function bindEnemy() {
     $('.char').off();
@@ -63,15 +57,14 @@
       $('#fight').show();
       $('.attack').show();
       playEnterance();
-      // debugger;
-      console.log($('.defender').length);
-      if ($('.defender').length === 0) {
-        $(this).removeClass('user');
+      if ($('.defender').length < 3) {
+        $(this).removeClass('user'); // might not need this line?
         $(this).removeClass("enemy");
         $(this).addClass('defender');
-        // $('.defender').off();
         $('#fight').append($(this));
         defender = players[$('.defender').data('user-name')];
+        defenderAttack = defender.attack;
+        defenderHP = defender.hp;
       }
     });
   }
@@ -83,29 +76,31 @@ function animateHit(p){
   p.css("font-size", "30px");
   p.fadeIn(500);
   if(p === p1){
-    p1.text(player.currentAttack);
+    p1.text(playerAttack);
     $('#'+ defender.name).append(p1);
   }
   else if(p === p2){
-    p2.text(defender.attack);
+    p2.text(defenderAttack);
     $('#'+ player.name).append(p2);
   }
   p.fadeOut(500);
 }
 
   $('.attack').on('click', function() {
+    console.log(player);
+    console.log(defender);
+
     animateHit(p1);
-    defender.hp = defender.hp - player.currentAttack;
-    player.currentAttack += player.attack;
+    defenderHP = defenderHP - playerAttack;
+    playerAttack += player.attack;
     //defender attacks back
     animateHit(p2);
-    player.hp = player.hp - defender.attack;
-    $('#' + player.name + 'HP').text(player.hp);
+    playerHP = playerHP - defenderAttack;
+    $('#' + player.name + 'HP').text(playerHP);
     playAttack();
     checkLose();
-    // console.log(player.name + " attack is : " + player.currentAttack);
-    $('#' + defender.name + 'HP').text(defender.hp);
-    if (defender.hp <= 0) {
+    $('#' + defender.name + 'HP').text(defenderHP);
+    if (defenderHP <= 0) {
       console.log(defender.name + " is dead");
       $('#enemies').append($('.defender'));
       $('#' + defender.name + 'HP').text('dead');
@@ -114,8 +109,8 @@ function animateHit(p){
       $('#fight').hide();
       $('#enemies').show();
       //restoring defender health for next round
-      defender.hp = defender.restoreHealth;
-      $('#' + defender.name + 'HP').text(defender.hp);
+      defenderHP = defender.hp;
+      $('#' + defender.name + 'HP').text(defenderHP);
       playAttack();
       checkWin();
     }
@@ -123,35 +118,28 @@ function animateHit(p){
   });
 
   function resetButton() {
-    // debugger;
     $('.reset').show();
-
-// NOTE: Events not unbinding properly?
-
+    $('#enemies').hide();
+    $('#fight').hide();
     $('.reset').on('click', function() {
-      // $('#chooseChar').show();
-      // // $('#yourChar').hide();
-      //   // $('.dead').show();
-      //   //reset clicks
-      //   $('.enemy').off();
-      //   //reset the classes
-      //   $('.dead').removeClass('dead').addClass('player');
-      //   $('.user').removeClass('user').addClass('player');
-      //   $('.enemy').removeClass('enemy').addClass('player');
-      //   $('.player').show();
-      //   $('#chooseChar').append($('.player'));
-      //   //reset the attacks
-      //   player.attack = player.restoreAttack;
-      //   //reset the health
-      //   player.hp = player.restoreHealth;
-      //   $('#' + player.name + 'HP').text(player.hp);
-      //   console.log(players);
-      //   //reset texts
-      //     $('#charText').text('Your Character');
-      //     init();
+      $('#chooseChar').show();
         //reset clicks
-
-        location.reload();
+        $('.enemy').off();
+        //reset the classes
+        $('.dead').removeClass('dead').addClass('player');
+        $('.user').removeClass('user').addClass('player');
+        $('.enemy').removeClass('enemy').addClass('player');
+        $('.defender').removeClass('defender').addClass('player');
+        $('.player').show();
+        $('#chooseChar').append($('.player'));
+        //reset the attacks
+        playerAttack = player.attack;
+        //reset the health
+        playerHP = player.hp;
+        $('#' + player.name + 'HP').text(playerHP);
+        //reset texts
+          $('#charText').text('Your Character');
+          init();
     });
   }
   $( "#dialog" ).dialog({
@@ -178,7 +166,7 @@ function animateHit(p){
   }
   //check lose
   function checkLose() {
-    if (player.hp <= 0 && $('.dead').length < 3) {
+    if (playerHP <= 0 && $('.dead').length < 3) {
       $('#charText').text('You Lose!');
       $('.attack').hide();
       resetButton();
@@ -202,7 +190,7 @@ function animateHit(p){
     entrance.currentTime = 0;
     entrance.play();
   }
-//sound on attack
+// //sound on attack
   var hit = new Audio();
 
   function playAttack(){
