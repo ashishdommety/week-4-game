@@ -35,6 +35,7 @@
       $('#chooseChar').hide();
       $('#yourChar').show();
       $('#enemies').show();
+      $('#fight').hide();
       playEnterance();
       $(this).addClass("user").removeClass("player");
       $(this).removeClass('defender');
