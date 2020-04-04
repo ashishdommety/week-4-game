@@ -1,2 +1,1 @@
-# week-4-game
-The Star Wars RPG!
+Star Wars RPG
