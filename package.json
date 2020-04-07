@@ -1,0 +1,23 @@
+{
+  "name": "star-wars-game",
+  "version": "1.0.0",
+  "description": "star wars rpg game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashishdommety/star-wars-game.git"
+  },
+  "author": "Ashish dommety",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashishdommety/star-wars-game/issues"
+  },
+  "homepage": "https://github.com/ashishdommety/star-wars-game#readme",
+  "dependencies": {
+    "grunt": "^1.1.0",
+    "webpack": "^4.42.1"
+  }
+}
