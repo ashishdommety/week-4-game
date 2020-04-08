@@ -3,10 +3,6 @@ const path = require("path");
 
 module.exports = {
   entry: "./src/index.js",
-  output: {
-    filename: "index.[contentHash].js",
-    path: path.resolve(__dirname + "/build"),
-  },
   module: {
     rules: [
       {
@@ -22,11 +18,6 @@ module.exports = {
   },
   resolve: {
     extensions: ["*", ".js"],
-  },
-  devServer: {
-    contentBase: "./build",
-    hot: true,
-    port: 9000,
   },
   plugins: [new HtmlWebPackPlugin({ template: "./src/template.html" })],
 };
