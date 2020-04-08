@@ -15,6 +15,30 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.html$/,
+        use: ["html-loader"],
+      },
+      {
+        test: /\.(svg|png|jpe?g|jpeg|gif)$/i,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[contenthash].[ext]",
+            outputPath: "imgs",
+          },
+        },
+      },
+      {
+        test: /\.(mp3|wav|wma|ogg)$/i,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[contenthash].[ext]",
+            outputPath: "sounds",
+          },
+        },
+      },
+      {
         test: /\.(png|jpg)$/,
         loader: "url-loader",
       },
