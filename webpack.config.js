@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "index.js",
+    filename: "index.[contentHash].js",
     path: path.resolve(__dirname + "/build"),
   },
   module: {
