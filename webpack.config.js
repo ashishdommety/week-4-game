@@ -14,6 +14,12 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    path: __dirname + "/build",
+    path: path.resolve(__dirname + "/build"),
+    publicPath: "/build",
+  },
+  devServer: {
+    contentBase: "./build",
+    hot: true,
+    port: 9000,
   },
 };
