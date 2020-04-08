@@ -28,5 +28,5 @@ module.exports = {
     hot: true,
     port: 9000,
   },
-  plugins: [new HtmlWebPackPlugin({ template: "./src/index.html" })],
+  plugins: [new HtmlWebPackPlugin({ template: "./src/template.html" })],
 };
