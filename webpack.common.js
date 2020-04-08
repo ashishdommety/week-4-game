@@ -28,20 +28,6 @@ module.exports = {
           },
         },
       },
-      {
-        test: /\.(mp3|wav|wma|ogg)$/i,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[name].[contenthash].[ext]",
-            outputPath: "sounds",
-          },
-        },
-      },
-      {
-        test: /\.(png|jpg)$/,
-        loader: "url-loader",
-      },
     ],
   },
   resolve: {
