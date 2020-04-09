@@ -1,6 +1,7 @@
 body {
   background-image: url("../images/bg2.png");
   background-size: cover;
+  text-align: center;
 }
 .container {
   color: white;
@@ -36,6 +37,7 @@ body {
   width: 100px;
   height: 100px;
   border-radius: 100px;
+  margin: 10px;
 }
 .light {
   border: 2px solid #dadada;
@@ -56,4 +58,10 @@ body {
   border-color: #ed9e9e;
   box-shadow: 0 0 10px #ed9e9e;
   cursor: pointer;
+}
+
+#all-characters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
