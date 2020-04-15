@@ -1,5 +1,9 @@
+import { globalState } from "../state/index.js";
+
 let state = {
-  characterNotSelected: true,
+  characterSelected: false,
+  selected: 0,
+  opponentSelected: false,
 };
 
 export const renderCharacters = (characters) => {
@@ -25,13 +29,29 @@ let renderCharacter = (character, allCharacters) => {
 
 let addEvents = (character, container) => {
   container.addEventListener("click", function () {
-    if (state.characterNotSelected) {
+    if (
+      !state.characterSelected &&
+      !state.opponentSelected &&
+      state.selected === 0
+    ) {
       let arena = document.getElementById("arena");
       arena.appendChild(container);
-      state.characterNotSelected = false;
+      state.characterSelected = true;
+      state.selected = state.selected + 1;
       console.log(`You've selected ${character.name}`);
-    } else {
-      console.log(`You can't select another character.`);
+      globalState.user = character;
+    } else if (
+      state.characterSelected &&
+      !state.opponentSelected &&
+      state.selected === 1
+    ) {
+      let arena = document.getElementById("arena");
+      arena.appendChild(container);
+      state.opponentSelected = true;
+      state.selected = state.selected + 1;
+      console.log(`You've selected ${character.name} as an opponent.`);
+      globalState.opponent = character;
     }
   });
+  console.log(state);
 };
