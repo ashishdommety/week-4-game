@@ -40,6 +40,7 @@ let addEvents = (character, container) => {
       state.selected = state.selected + 1;
       console.log(`You've selected ${character.name}`);
       globalState.user = character;
+      document.getElementById("notification").innerHTML = "Choose an opponent";
     } else if (
       state.characterSelected &&
       !state.opponentSelected &&
@@ -51,7 +52,35 @@ let addEvents = (character, container) => {
       state.selected = state.selected + 1;
       console.log(`You've selected ${character.name} as an opponent.`);
       globalState.opponent = character;
+      document.getElementById("notification").innerHTML =
+        "Begin the duel! May the force be with you.";
+      document.getElementById("all-characters").style.display = "none";
+      createHealthBar();
     }
   });
   console.log(state);
+};
+
+let createHealthBar = () => {
+  let healthBarsContainer = document.createElement("div");
+  healthBarsContainer.setAttribute("class", "health-bars-container");
+  document.getElementsByTagName("BODY")[0].appendChild(healthBarsContainer);
+
+  let userHealthBar = document.createElement("div");
+  userHealthBar.setAttribute("class", "health-bar user-health");
+
+  let usersHealth = document.createElement("p");
+  usersHealth.innerHTML = `Your Health: ${globalState.user.health}`;
+
+  userHealthBar.appendChild(usersHealth);
+
+  let opponentHealthBar = document.createElement("div");
+  opponentHealthBar.setAttribute("class", "health-bar opponent-health");
+
+  let opponentsHealth = document.createElement("p");
+  opponentsHealth.innerHTML = `Opponent's Health: ${globalState.opponent.health}`;
+  opponentHealthBar.appendChild(opponentsHealth);
+
+  healthBarsContainer.appendChild(userHealthBar);
+  healthBarsContainer.appendChild(opponentHealthBar);
 };
