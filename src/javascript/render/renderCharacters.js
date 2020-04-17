@@ -36,6 +36,14 @@ let addEvents = (character, container) => {
     ) {
       let arena = document.getElementById("arena");
       arena.appendChild(container);
+      let attackBtn = document.createElement("button");
+      attackBtn.setAttribute("id", "attack-btn");
+      attackBtn.innerText = "Attack";
+      attackBtn.addEventListener("click", () => {
+        console.log("you clicked attack");
+      });
+
+      arena.appendChild(attackBtn);
       state.characterSelected = true;
       state.selected = state.selected + 1;
       console.log(`You've selected ${character.name}`);
