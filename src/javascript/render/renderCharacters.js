@@ -116,10 +116,18 @@ let checkWin = () => {
   let userHealth = globalState.user.health;
   let opponentHealth = globalState.opponent.health;
   if (opponentHealth <= 0 && userHealth <= 0) {
-    console.log("Draw!");
+    clearArena("Draw.");
   } else if (opponentHealth <= 0) {
-    console.log("You win!");
+    clearArena("You win!");
   } else if (userHealth <= 0) {
-    console.log("You lose...");
+    clearArena("You lose...");
   }
+};
+
+let clearArena = (message) => {
+  let arena = document.getElementById("arena");
+  arena.innerHTML = "";
+  let status = document.createElement("h2");
+  status.innerText = message;
+  arena.appendChild(status);
 };
