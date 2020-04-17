@@ -39,14 +39,24 @@ let addEvents = (character, container) => {
       let attackBtn = document.createElement("button");
       attackBtn.setAttribute("id", "attack-btn");
       attackBtn.innerText = "Attack";
+
       attackBtn.addEventListener("click", () => {
-        console.log("you clicked attack");
+        globalState.opponent.health =
+          globalState.opponent.health - globalState.user.attack;
+
+        globalState.user.health =
+          globalState.user.health - globalState.opponent.attack;
+
+        let userHealth = document.getElementById("user-health");
+        userHealth.innerText = globalState.user.health;
+        let opponentHealth = document.getElementById("opponent-health");
+        opponentHealth.innerText = globalState.opponent.health;
       });
 
       arena.appendChild(attackBtn);
       state.characterSelected = true;
       state.selected = state.selected + 1;
-      console.log(`You've selected ${character.name}`);
+      console.log(character);
       globalState.user = character;
       document.getElementById("notification").innerHTML = "Choose an opponent";
     } else if (
@@ -58,7 +68,7 @@ let addEvents = (character, container) => {
       arena.appendChild(container);
       state.opponentSelected = true;
       state.selected = state.selected + 1;
-      console.log(`You've selected ${character.name} as an opponent.`);
+      console.log(character);
       globalState.opponent = character;
       document.getElementById("notification").innerHTML =
         "Begin the duel! May the force be with you.";
@@ -66,7 +76,6 @@ let addEvents = (character, container) => {
       createHealthBar();
     }
   });
-  console.log(state);
 };
 
 let createHealthBar = () => {
