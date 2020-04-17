@@ -129,5 +129,15 @@ let clearArena = (message) => {
   arena.innerHTML = "";
   let status = document.createElement("h2");
   status.innerText = message;
+  let resetBtn = document.createElement("button");
+  resetBtn.innerText = "Reset";
+  resetBtn.addEventListener("click", () => {
+    resetGame();
+  });
   arena.appendChild(status);
+  arena.appendChild(resetBtn);
+};
+
+let resetGame = () => {
+  renderCharacters();
 };
