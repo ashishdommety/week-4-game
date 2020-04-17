@@ -67,18 +67,26 @@ let createHealthBar = () => {
   document.getElementsByTagName("BODY")[0].appendChild(healthBarsContainer);
 
   let userHealthBar = document.createElement("div");
-  userHealthBar.setAttribute("class", "health-bar user-health");
+  userHealthBar.setAttribute("class", "health-bar");
 
   let usersHealth = document.createElement("p");
-  usersHealth.innerHTML = `Your Health: ${globalState.user.health}`;
+  usersHealth.innerHTML = `Your Health: `;
 
+  let userHealthStatus = document.createElement("span");
+  userHealthStatus.setAttribute("id", "user-health");
+  userHealthStatus.innerHTML = globalState.user.health;
+  usersHealth.appendChild(userHealthStatus);
   userHealthBar.appendChild(usersHealth);
 
   let opponentHealthBar = document.createElement("div");
-  opponentHealthBar.setAttribute("class", "health-bar opponent-health");
+  opponentHealthBar.setAttribute("class", "health-bar ");
 
   let opponentsHealth = document.createElement("p");
-  opponentsHealth.innerHTML = `Opponent's Health: ${globalState.opponent.health}`;
+  opponentsHealth.innerHTML = `Opponent's Health: `;
+  let opponentHealthStatus = document.createElement("span");
+  opponentHealthStatus.setAttribute("id", "opponent-health");
+  opponentHealthStatus.innerHTML = globalState.opponent.health;
+  opponentsHealth.appendChild(opponentHealthStatus);
   opponentHealthBar.appendChild(opponentsHealth);
 
   healthBarsContainer.appendChild(userHealthBar);
