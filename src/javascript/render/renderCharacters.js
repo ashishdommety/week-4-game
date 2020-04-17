@@ -51,6 +51,8 @@ let addEvents = (character, container) => {
         userHealth.innerText = globalState.user.health;
         let opponentHealth = document.getElementById("opponent-health");
         opponentHealth.innerText = globalState.opponent.health;
+
+        checkWin();
       });
 
       arena.appendChild(attackBtn);
@@ -108,4 +110,16 @@ let createHealthBar = () => {
 
   healthBarsContainer.appendChild(userHealthBar);
   healthBarsContainer.appendChild(opponentHealthBar);
+};
+
+let checkWin = () => {
+  let userHealth = globalState.user.health;
+  let opponentHealth = globalState.opponent.health;
+  if (opponentHealth <= 0 && userHealth <= 0) {
+    console.log("Draw!");
+  } else if (opponentHealth <= 0) {
+    console.log("You win!");
+  } else if (userHealth <= 0) {
+    console.log("You lose...");
+  }
 };
