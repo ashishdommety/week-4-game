@@ -1,11 +1,6 @@
 import { characters } from "./characterConstructor";
-import { renderCharacters } from "./render/renderCharacters";
-import { selectCharacter } from "./domManipulation/selectCharacter";
+import { renderAllCharacters } from "./render/renderAllCharacters";
 
 export const createCharacters = () => {
-  renderCharacters(characters);
-};
-
-export const selectOneCharacter = () => {
-  selectCharacter();
+  renderAllCharacters(characters);
 };
