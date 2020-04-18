@@ -30,6 +30,11 @@ let appendUser = (container, character) => {
   attackBtn.innerText = "Attack";
   arena.appendChild(attackBtn);
 
+  state.characterSelected = true;
+  state.selected = state.selected + 1;
+  state.user = Object.assign({}, character);
+  document.getElementById("notification").innerHTML = "Choose an opponent";
+
   attackBtn.addEventListener("click", () => {
     state.opponent.health = state.opponent.health - state.user.attack;
 
@@ -42,12 +47,6 @@ let appendUser = (container, character) => {
 
     checkWin();
   });
-
-  state.characterSelected = true;
-  state.selected = state.selected + 1;
-  console.log(character);
-  state.user = character;
-  document.getElementById("notification").innerHTML = "Choose an opponent";
 };
 
 let appendOpponent = (container, character) => {
@@ -55,8 +54,7 @@ let appendOpponent = (container, character) => {
   arena.appendChild(container);
   state.opponentSelected = true;
   state.selected = state.selected + 1;
-  console.log(character);
-  state.opponent = character;
+  state.opponent = Object.assign({}, character);
   document.getElementById("notification").innerHTML =
     "Begin the duel! May the force be with you.";
   document.getElementById("all-characters").style.display = "none";
