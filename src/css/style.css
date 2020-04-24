@@ -1,0 +1,108 @@
+body {
+  background-image: url("../images/bg2.png");
+  background-size: cover;
+  text-align: center;
+}
+.container {
+  color: white;
+}
+#attack,
+#reset {
+  color: white;
+  background-color: #212b77;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  width: 100%;
+  outline: none;
+  transition: background-color 0.2s;
+}
+
+#attack:hover,
+#reset:hover {
+  outline: none;
+  cursor: pointer;
+  background-color: #ff6272;
+}
+
+#anakin {
+  background-image: url("../images/anakin.jpg");
+}
+#obiwan {
+  background-image: url("../images/obiwan.jpg");
+}
+#dooku {
+  background-image: url("../images/dooku.jpg");
+}
+#vader {
+  background-image: url("../images/vader.jpg");
+}
+.character {
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin: 10px;
+}
+.light {
+  border: 2px solid #dadada;
+  border-radius: 100px;
+}
+.dark {
+  border: 2px solid #dadada;
+  border-radius: 100px;
+}
+.light:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+  cursor: pointer;
+}
+.dark:hover {
+  outline: none;
+  border-color: #ed9e9e;
+  box-shadow: 0 0 10px #ed9e9e;
+  cursor: pointer;
+}
+
+#all-characters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#arena {
+  margin-top: 10px;
+  padding: 20px;
+  padding-top: 50px;
+  background: white;
+  height: 200px;
+  border-radius: 10px;
+}
+
+#battle-ground {
+  display: flex;
+  justify-content: center;
+}
+
+.character-health {
+  font-size: 25px;
+  display: block;
+  position: relative;
+  top: -25px;
+}
+
+#user-health {
+  text-align: left;
+}
+#opponent-health {
+  text-align: right;
+}
+
+@media only screen and (min-width: 600px) {
+  #arena {
+    width: 600px;
+    margin: auto;
+  }
+}
