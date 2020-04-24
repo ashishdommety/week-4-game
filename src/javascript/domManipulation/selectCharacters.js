@@ -7,17 +7,18 @@ export let selectCharacters = (character, container) => {
 
   function selectionLogic(e) {
     if (
-      !state.characterSelected &&
+      !state.userSelected &&
       !state.opponentSelected &&
       state.selected === 0
     ) {
       appendUser(e.target, character);
     } else if (
-      state.characterSelected &&
+      state.userSelected &&
       !state.opponentSelected &&
       state.selected === 1
     ) {
       appendOpponent(e.target, character);
+      enableAttacking();
     }
   }
 };
@@ -30,26 +31,29 @@ let appendUser = (container, character) => {
 
   battleGround.appendChild(container);
 
-  state.characterSelected = true;
-  state.selected = state.selected + 1;
-  state.user = Object.assign({}, character);
+  updateState(character, "user");
 
   document.getElementById("notification").innerHTML = "Choose an opponent";
 };
 
 let appendOpponent = (container, character) => {
   let battleGround = document.getElementById("battle-ground");
-
   battleGround.append(container);
 
-  state.opponentSelected = true;
-  state.selected = state.selected + 1;
-  state.opponent = Object.assign({}, character);
+  updateState(character, "opponent");
 
   document.getElementById("notification").innerHTML =
     "Begin the duel! May the force be with you.";
   document.getElementById("all-characters").style.display = "none";
   createHealthBars();
+};
+
+let enableAttacking = () => {
+  let attackBtn = createAttackBtn();
+  attack(attackBtn);
+  console.log(attackBtn);
+  let arena = document.getElementById("arena");
+  arena.append(attackBtn);
 };
 
 let createAttackBtn = () => {
@@ -59,8 +63,8 @@ let createAttackBtn = () => {
   return attackBtn;
 };
 
-let attack = () => {
-  attackBtn.addEventListener("click", () => {
+let attack = (btn) => {
+  btn.addEventListener("click", () => {
     state.opponent.health = state.opponent.health - state.user.attack;
 
     state.user.health = state.user.health - state.opponent.attack;
@@ -72,4 +76,10 @@ let attack = () => {
 
     checkWin();
   });
+};
+
+let updateState = (character, type) => {
+  state[type + "Selected"] = true;
+  state.selected = state.selected + 1;
+  state[type] = Object.assign({}, character);
 };

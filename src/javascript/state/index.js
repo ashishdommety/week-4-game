@@ -1,7 +1,7 @@
 export let state = {
   user: {},
   opponent: {},
-  characterSelected: false,
+  userSelected: false,
   selected: 0,
   opponentSelected: false,
 };
