@@ -8,6 +8,7 @@ export let endGame = (message) => {
   status.innerText = message;
   let resetBtn = document.createElement("button");
   resetBtn.innerText = "Reset";
+  resetBtn.setAttribute("id", "reset");
   resetBtn.addEventListener("click", () => {
     resetGame();
   });

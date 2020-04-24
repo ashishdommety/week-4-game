@@ -6,8 +6,8 @@ body {
 .container {
   color: white;
 }
-.attack,
-.reset {
+#attack,
+#reset {
   color: white;
   background-color: #212b77;
   border: none;
@@ -72,6 +72,9 @@ body {
   background: white;
   height: 200px;
   border-radius: 10px;
+}
+
+#battle-ground {
   display: flex;
   justify-content: center;
 }
