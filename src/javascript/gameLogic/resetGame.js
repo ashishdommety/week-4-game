@@ -1,7 +1,6 @@
 import { renderOneCharacter } from "../render/renderOneCharacter";
 import { characters } from "../characterConstructor";
 import { clearArena } from "../domManipulation/clearArena";
-import { clearHealthBars } from "../domManipulation/clearHealthBars";
 import { resetState } from "../state/resetState";
 
 export let resetGame = () => {
@@ -12,6 +11,5 @@ export let resetGame = () => {
     renderOneCharacter(characters[i], allCharacters);
   }
   clearArena();
-  clearHealthBars();
   resetState();
 };
