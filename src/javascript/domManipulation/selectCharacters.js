@@ -25,14 +25,14 @@ export let selectCharacters = (character, container) => {
 let appendUser = (container, character) => {
   let arena = document.getElementById("arena");
   arena.appendChild(container);
-  let attackBtn = document.createElement("button");
-  attackBtn.setAttribute("id", "attack-btn");
-  attackBtn.innerText = "Attack";
+
+  let attackBtn = createAttackBtn();
   arena.appendChild(attackBtn);
 
   state.characterSelected = true;
   state.selected = state.selected + 1;
   state.user = Object.assign({}, character);
+
   document.getElementById("notification").innerHTML = "Choose an opponent";
 
   attackBtn.addEventListener("click", () => {
@@ -59,4 +59,11 @@ let appendOpponent = (container, character) => {
     "Begin the duel! May the force be with you.";
   document.getElementById("all-characters").style.display = "none";
   createHealthBars();
+};
+
+let createAttackBtn = () => {
+  let attackBtn = document.createElement("button");
+  attackBtn.setAttribute("id", "attack-btn");
+  attackBtn.innerText = "Attack";
+  return attackBtn;
 };
