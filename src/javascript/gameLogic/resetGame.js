@@ -1,5 +1,5 @@
 import { renderOneCharacter } from "../render/renderOneCharacter";
-import { characters } from "../characterConstructor";
+import { characters } from "../constructors";
 import { clearArena } from "../domManipulation/clearArena";
 import { resetState } from "../state/resetState";
 
